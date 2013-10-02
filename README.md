@@ -26,6 +26,7 @@ in the directory with the package.json file will install the modules needed for 
 Manadatory
 + --file "PATH/TO/PRINTFILE"
 + --port "SERIAL PORT FOR PRINTER CONNECTION. USUALLY /dev/tty.something"
++ --baudrate 19200 etc. - The baudrate for the serial port connection
 
 Optional
 + --speed 1.0 - This is a multiplier that will modify the travel rate of the printhead. This is something we need for our printer.

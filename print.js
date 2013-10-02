@@ -9,6 +9,7 @@ var printCommands = [],
 var settings = {
     printFile : undefined,
     serialPort : undefined,
+    baudrate : undefined,
     printing : false,
     paused : false
 }
@@ -24,6 +25,14 @@ var handleArguments = (function(){
         settings.serialPort = argv.port;
     } else {
         console.log("No serial port passed. Exiting");
+        process.exit(1);
+    }
+
+    if(argv.baudrate){
+        console.log(argv.baudrate);
+        settings.baudrate = argv.baudrate;
+    } else {
+        console.log("No Baudrate passed for serial port. Exiting");
         process.exit(1);
     }
 
@@ -57,7 +66,7 @@ fs.readFile(settings.printFile, 'utf8', function (err,data) {
 var SerialPort = serialport.SerialPort;
 var sp = new SerialPort(settings.serialPort, { 
     parser: serialport.parsers.readline("\n"),
-    baudrate : 19200
+    baudrate : settings.baudrate
 });
 
 sp.on("open", function () {
