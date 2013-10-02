@@ -1,6 +1,6 @@
 var serialport = require("serialport"),
     fs = require('fs'),
-    keypress = require('keypress');
+    argv = require('optimist').argv;
 
 var printCommands = [],
     printPosition = 0;
@@ -17,59 +17,27 @@ var settings = {
 
 //===========================================================
 // Self executing function - Will run before the file load
-// Usage: node [options] print.js [FILE PATH] [SPEED MULTIPLIER]
+// Usage: node [options] print.js --file [FILE PATH] --speed [SPEED MULTIPLIER]
 //===========================================================
 
 var handleArguments = (function(){
 
-    //The absolute or relative file path of the GCODE to be printed;
-    if(process.argv[2] != undefined){
-        settings.printFile = process.argv[2];
-        console.log("Printing file: " + settings.printFile);
+    if(argv.file){
+        settings.printFile = argv.file;
+        console.log(settings.printFile);
     } else {
+        console.log("No print file passed. Exiting");
+        console.log(argv.file);
         process.exit(1);
     }
 
     //Optional :: The multiplying factor that affects the travelling speed of the printhead
-    if(process.argv[3] != undefined){
-        settings.speedMultiplier = process.argv[3];
+    if(argv.speed){
+        console.log("Speed multiplying factor:" + argv.speed);
+        settings.speedMultiplier = argv.speed;
     }
 
 })();
-
-/*var keyEvents = (function(){
-
-    keypress(process.stdin);
-    console.log("Got here");
-
-    process.stdin.on('keypress', function(ch, key){
-        
-        if(key.name === "space" && settings.printing === true){
-            //printerCommand("M226")
-            
-            if(settings.paused === false){
-                // printerCommand("M226");
-                // process.stdin.pause();
-                settings.paused = true;
-            } else{
-                // printerCommand("");
-                settings.paused = false;
-            }
-
-        }
-
-        if(key.name === "escape"){
-            printerCommand("M112");
-            process.exit(0);
-        }
-
-    });
-
-
-    process.stdin.setRawMode(true);
-    //process.stdin.resume();
-
-})();*/
 
 fs.readFile(settings.printFile, 'utf8', function (err,data) {
 
