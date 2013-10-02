@@ -11,7 +11,7 @@ node print.js --port "/dev/tty-blah-blah" --file "printFiles/helloWorld.gcode"
 ```
 
 ###Initial Setup
-This app uses a few modules, (https://github.com/voodootikigod/node-serialport "Voodootikigod's Serialport library") for communicating with the printer and (https://github.com/substack/node-optimist "Substack's optimist") for argument parsing.
+This app uses a few modules, [Voodootikigod's Serialport library](https://github.com/voodootikigod/node-serialport) for communicating with the printer and ["Substack's optimist"](https://github.com/substack/node-optimist) for argument parsing.
 
 ```
 npm install
