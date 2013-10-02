@@ -1,3 +1,8 @@
+var settings = {
+    extrusionMultiplier : 20,
+    heightMulitplier : 1,
+    speedMultiplier : 1
+}
 
 function deconstruct(code){
 
@@ -116,6 +121,6 @@ function reconstruct(command){
 }
 
 
-
+module.exports.settings = settings;
 module.exports.deconstruct = deconstruct;
 module.exports.reconstruct = reconstruct;

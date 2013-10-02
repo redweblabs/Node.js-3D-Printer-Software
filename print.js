@@ -6,10 +6,7 @@ var serialport = require("serialport"),
 var printCommands = [],
     printPosition = 0;
 
-GLOBAL.settings = {
-    extrusionMultiplier : 20,
-    heightMulitplier : 1,
-    speedMultiplier : 1,
+var settings = {
     printFile : undefined,
     serialPort : undefined,
     printing : false,
@@ -42,7 +39,7 @@ var handleArguments = (function(){
     //Optional :: The multiplying factor that affects the travelling speed of the printhead
     if(argv.speed){
         console.log("Speed multiplying factor:" + argv.speed);
-        settings.speedMultiplier = argv.speed;
+        GCODE.settings.speedMultiplier = argv.speed;
     }
 
 })();
